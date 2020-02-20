@@ -20,56 +20,63 @@ public class TablePerHierarchyDao {
 	private Session session;
 	private Transaction transaction;
 
-	public String addEmployee(Regular_Employee regularEmployee, Contract_Employee contractEmployee) {
-		List<Employee> list = connection();
-		Boolean idPresent = false;
-		if (!list.isEmpty()) {
-			for (Employee p : list) {
-				if (employee.getId() == p.getId()) {
-					idPresent = true;
-					return "Employee Id is already present";
-				}
-			}
-		}
-			if (!idPresent) {
-				Regular_Employee re = new Regular_Employee();
-				re.setName(employee.getName());
-				re.setBonus(employee.get);
-				Contract_Employee ce = new Contract_Employee();
-				ce.setName(employee.getName());
-				session.save(p1);
-				transaction.commit();
-			}
-		String msg = "successfully saved data";
-		System.out.println(msg);
-		factory.close();
-
-		session.close();
-
-		return msg;
-	}
-
-	List<Employee> connection() {
+	void connection() {
 		factory = ProductsSessionFactory.getSessionFactory();
 		session = factory.openSession();
 		transaction = session.beginTransaction();
-		Query<Employee> query = session.createQuery("FROM Employee");
-		List<Employee> list = query.getResultList();
-		return list;
-
+		
 	}
 
 	public Employee fetchEmployee(int id) {
-		List<Employee> list = connection();
+		connection();
+		Query<Employee> query = session.createQuery("FROM Employee");
+		List<Employee> list = query.getResultList();
 		Employee employeesModel = new Employee();
 		for (Employee e : list) {
 			if (id == e.getId()) {
-				System.out.println("***************");
+				employeesModel.setId(id);
+				employeesModel.setName(e.getName());
 			}
 		}
 		return employeesModel;
 	}
 
+	public String addRegularEmployee(Regular_Employee regularEmployee) {
+		connection();
+		Regular_Employee re = new Regular_Employee();
+		re.setName(regularEmployee.getName());
+		re.setSalary(regularEmployee.getSalary());
+		re.setBonus(regularEmployee.getBonus());
+		
+		session.save(re);
+		transaction.commit();
+		
+		String msg = "Successfully added Regular Employee : " + re.getName();
+		System.out.println(msg);
+
+		//factory.close();
+		session.close();
+
+		return msg;
+	}
+
+	public String addContractEmployee(Contract_Employee contractEmployee) {
+		connection();
+		Contract_Employee ce = new Contract_Employee();
+		ce.setName(contractEmployee.getName());
+		ce.setPay_per_hour(contractEmployee.getPay_per_hour());
+		ce.setContract_duration(contractEmployee.getContract_duration());
+		
+		session.save(ce);
+		transaction.commit();
+		
+		String msg = "Successfully added Contract Employee : " + ce.getName();
+		System.out.println(msg);
+
+		//factory.close();
+		session.close();
+
+		return msg;
 	}
 
 }
