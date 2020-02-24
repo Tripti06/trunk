@@ -2,7 +2,8 @@ package com.example.springboothibernate.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.persistence.criteria.CriteriaQuery;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -29,8 +30,9 @@ public class TablePerHierarchyDao {
 
 	public Employee fetchEmployee(int id) {
 		connection();
-		Query<Employee> query = session.createQuery("FROM Employee");
-		List<Employee> list = query.getResultList();
+		CriteriaQuery<Employee> cq = session.getCriteriaBuilder().createQuery(Employee.class);
+		cq.from(Employee.class);
+		List<Employee> list = session.createQuery(cq).getResultList();
 		Employee employeesModel = new Employee();
 		for (Employee e : list) {
 			if (id == e.getId()) {

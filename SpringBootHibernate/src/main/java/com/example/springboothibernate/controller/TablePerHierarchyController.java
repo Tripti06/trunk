@@ -21,12 +21,12 @@ public class TablePerHierarchyController {
 	/*
 	 * Post employee data as below from any requester tool
 	 * 
-	 * URI : http://localhost:7071/addRegularEmployee 
+	 * URI : http://localhost:7072/addRegularEmployee 
 	 * Body for addRegularEmployee :  {"name" : "Tripti", "salary" : "50000", "bonus" : "5000"}
 	 * 
 	 * OR
 	 * 
-	 * URI: http://localhost:7071/addContractEmployee 
+	 * URI: http://localhost:7072/addContractEmployee 
 	 * Body for contractEmployee : {"name" : "Tripti", "pay_per_hour":"1000", "contract_duration":"15 hours"} 
 	 * 
 	 * Body Content type: application/json 

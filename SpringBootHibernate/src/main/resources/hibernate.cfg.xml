@@ -11,7 +11,8 @@
 		<property name="connection.password">tripti</property>
 		<property name="connection.driver_class">org.h2.Driver</property>
 		<mapping resource="productmodel.hbm.xml" />
-		<mapping resource="employee.hbm.xml"/>  
+		<mapping resource="employee.hbm.xml"/>
+		<mapping resource="employeetperconcrete.hbm.xml"/>  
 	</session-factory>
 
 </hibernate-configuration>  

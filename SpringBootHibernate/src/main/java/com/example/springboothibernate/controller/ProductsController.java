@@ -18,7 +18,7 @@ public class ProductsController {
 	
 	
 	/*Post employee data as below from any requester tool 
-	 * URI: http://localhost:7071/uploadData
+	 * URI: http://localhost:7072/uploadData
 	 * Body: {"productId" : "101", "productName" : "Purse", "productAmount" : "2500"}
 	 * Body Content type: application/json
 	 * Method: POST
